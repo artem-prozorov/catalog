@@ -1,0 +1,29 @@
+{
+    "name": "catalog/core",
+    "description": "Framework-agnostic library to provide catalog with sections and properties",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^9.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Artem Prozorov",
+            "email": "artem.g.prozorov@gmail.com"
+        }
+    ],
+    "require": {
+        "prozorov/repositories": "^2.0",
+        "mockery/mockery": "^1.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Catalog\\Core\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Catalog\\Core\\Tests\\": "tests/"
+        }
+    }
+}
