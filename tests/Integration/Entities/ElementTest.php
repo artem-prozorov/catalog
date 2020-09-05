@@ -33,13 +33,13 @@ class ElementTest extends BaseTestCase
             'code' => 'product',
         ]);
 
-        $this->assertEquals($properties['manufacturer'], (string) $element->getPropertyValue('manufacturer'));
-        $this->assertEquals($properties['country'], (string) $element->getPropertyValue('country'));
+        $this->assertEquals('Samsung', (string) $element->getPropertyValue('manufacturer'));
+        $this->assertEquals('China', (string) $element->getPropertyValue('country'));
 
         $this->repositoryFactory->assertNoCalls();
 
-        $this->assertEquals($properties['manufacturer'], (string) $element->getPropertyValue('manufacturer'));
-        $this->assertEquals($properties['country'], (string) $element->getPropertyValue('country'));
+        $this->assertEquals('Samsung', (string) $element->getPropertyValue('manufacturer'));
+        $this->assertEquals('China', (string) $element->getPropertyValue('country'));
     }
 
     /**
