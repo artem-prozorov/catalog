@@ -6,6 +6,7 @@ use Catalog\Core\Properties\Property;
 use Catalog\Core\Entities\Element;
 use Catalog\Core\Traits\HasId;
 use Catalog\Core\Catalog;
+use InvalidArgumentException;
 
 abstract class AbstractPropertyValue
 {
@@ -41,6 +42,13 @@ abstract class AbstractPropertyValue
         $this->setData($data);
     }
 
+    /**
+     * setData.
+     *
+     * @access	public
+     * @param	iterable	$data	Default: null
+     * @return	void
+     */
     public function setData(iterable $data = null)
     {
         $this->id = $data['id'] ?? 0;
@@ -98,6 +106,13 @@ abstract class AbstractPropertyValue
     public function isInitialized(): bool
     {
         return $this->initialized;
+    }
+
+    public function markInitialized(): AbstractPropertyValue
+    {
+        $this->initialized = true;
+
+        return $this;
     }
 
     protected function getRepositoryName(): string

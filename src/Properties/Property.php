@@ -25,6 +25,9 @@ class Property
         $this->id = $data['id'] ?? 0;
         $this->name = $data['name'] ?? '';
         $this->code = $data['code'] ?? '';
+
+        $this->multiple = (bool) ($data['is_multiple'] ?? false);
+        $this->required = (bool) ($data['is_required'] ?? false);
     }
 
     public function isMultiple(): bool

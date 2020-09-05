@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Catalog\Core\Collections;
 
 use Catalog\Core\Properties\Values\AbstractPropertyValue;
+use Catalog\Core\Properties\Values\MultiplePropertyValue;
 use Catalog\Core\Properties\Values\StringValue;
 use Catalog\Core\Properties\Property;
 use Catalog\Core\Properties\PropertyMap;
@@ -71,18 +72,32 @@ class PropertyValues
 
     protected function initValue(Property $property, array $data = null): void
     {
-        if ($property->isMultiple()) {
-            // Initialize multiple property, a separate class MultiplePropertyValue
-            // $this->loadedProperties[$code] = ..; //
-
-            return;
-        }
-
-        $this->loadedProperties[$property->getCode()] = Catalog::getPropertyValuesFactory()
+        $value = Catalog::getPropertyValuesFactory()
             ->createSuitableProperty(
                 $property,
                 $this->element,
                 $data
             );
+
+        if ($property->isMultiple()) {
+            $multipleValue = $this->getMultiplePropertyValue($property);
+
+            $multipleValue->addValue($value);
+
+            $this->loadedProperties[$property->getCode()] = $multipleValue;
+
+            return;
+        }
+
+        $this->loadedProperties[$property->getCode()] = $value;
+    }
+
+    protected function getMultiplePropertyValue(Property $property): MultiplePropertyValue
+    {
+        if (empty($this->loadedProperties[$property->getCode()])) {
+            return new MultiplePropertyValue($property, $this->element);
+        }
+
+        return $this->loadedProperties[$property->getCode()];
     }
 }
