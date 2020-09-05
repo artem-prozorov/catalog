@@ -108,6 +108,12 @@ abstract class AbstractPropertyValue
         return $this->initialized;
     }
 
+    /**
+     * Mark this propery value as initialized
+     *
+     * @access	public
+     * @return	AbstractPropertyValue
+     */
     public function markInitialized(): AbstractPropertyValue
     {
         $this->initialized = true;

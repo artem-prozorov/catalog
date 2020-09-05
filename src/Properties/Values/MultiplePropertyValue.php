@@ -14,7 +14,7 @@ class MultiplePropertyValue extends AbstractPropertyValue
      */
     public function __toString()
     {
-        return $this->getValue();
+        return json_encode($this->toArray());
     }
 
     /**

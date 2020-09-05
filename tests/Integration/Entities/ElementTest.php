@@ -35,11 +35,19 @@ class ElementTest extends BaseTestCase
 
         $this->assertEquals('Samsung', (string) $element->getPropertyValue('manufacturer'));
         $this->assertEquals('China', (string) $element->getPropertyValue('country'));
+        $this->assertEquals(
+            json_encode([3 => 's', 4 => 'm']),
+            (string) $element->getPropertyValue('available_sizes')
+        );
 
         $this->repositoryFactory->assertNoCalls();
 
         $this->assertEquals('Samsung', (string) $element->getPropertyValue('manufacturer'));
         $this->assertEquals('China', (string) $element->getPropertyValue('country'));
+        $this->assertEquals(
+            json_encode([3 => 's', 4 => 'm']),
+            (string) $element->getPropertyValue('available_sizes')
+        );
     }
 
     /**

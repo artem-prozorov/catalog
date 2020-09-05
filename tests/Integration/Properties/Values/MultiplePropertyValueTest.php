@@ -39,7 +39,7 @@ class MultiplePropertyValueTest extends BaseTestCase
 
         $multipleString->markInitialized();
 
-        $this->assertEquals([1 => 'Some string'], $multipleString->__toString());
+        $this->assertEquals(json_encode([1 => 'Some string']), $multipleString->__toString());
     }
 
     /**
