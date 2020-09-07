@@ -6,6 +6,7 @@ use Catalog\Core\Properties\Property;
 use Catalog\Core\Entities\Element;
 use Catalog\Core\Traits\HasId;
 use Catalog\Core\Catalog;
+use Catalog\Core\Manager;
 use InvalidArgumentException;
 
 abstract class AbstractPropertyValue
@@ -141,7 +142,7 @@ abstract class AbstractPropertyValue
             $where = ['id' => $this->getId()];
         }
 
-        $raw = Catalog::getRepositoryFactory()->getRepository($this->getRepositoryName())
+        $raw = Manager::getRepositoryFactory()->getRepository($this->getRepositoryName())
             ->first($where);
 
         $this->setData($raw);

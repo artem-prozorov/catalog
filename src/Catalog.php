@@ -6,38 +6,40 @@ namespace Catalog\Core;
 
 use Repositories\Core\RepositoryFactory;
 use Catalog\Core\Properties\Values\PropertyValuesFactory;
+use Catalog\Core\Properties\PropertY;
+use Catalog\Core\Entities\Element;
+use Catalog\Core\Traits\HasCode;
 
 class Catalog
 {
-    protected static RepositoryFactory $repositoryFactory;
+    use HasCode;
 
-    protected static PropertyValuesFactory $propertyValueFactory;
+    protected string $code;
 
-    public static function getRepositoryFactory(): RepositoryFactory
+    public function __construct(string $code)
     {
-        if (empty(static::$repositoryFactory)) {
-            throw new \RuntimeException('Repository factory is not configured');
-        }
-
-        return static::$repositoryFactory;
+        $this->code = $code;
     }
 
-    public static function setRepositoryFactory(RepositoryFactory $factory)
+    /**
+     * makeElement.
+     *
+     * @access	public
+     * @return	Element
+     */
+    public function makeElement(): Element
     {
-        static::$repositoryFactory = $factory;
+        return new Element(['catalog_code' => $this->getCode()]);
     }
 
-    public static function getPropertyValuesFactory(): PropertyValuesFactory
+    /**
+     * makeProperty.
+     *
+     * @access	public
+     * @return	Property
+     */
+    public function makeProperty(): Property
     {
-        if (empty(static::$propertyValueFactory)) {
-            throw new \RuntimeException('Property value factory is not configured');
-        }
-
-        return static::$propertyValueFactory;
-    }
-
-    public static function setPropertyValuesFactory(PropertyValuesFactory $factory)
-    {
-        static::$propertyValueFactory = $factory;
+        return new Property(['catalog_code' => $this->getCode()]);
     }
 }

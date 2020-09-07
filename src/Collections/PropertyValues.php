@@ -10,7 +10,7 @@ use Catalog\Core\Properties\Values\StringValue;
 use Catalog\Core\Properties\Property;
 use Catalog\Core\Properties\PropertyMap;
 use Catalog\Core\Entities\Element;
-use Catalog\Core\Catalog;
+use Catalog\Core\Manager;
 
 class PropertyValues
 {
@@ -52,7 +52,7 @@ class PropertyValues
         }
 
         if (! empty($toBeLoaded)) {
-            $rows = Catalog::getRepositoryFactory()
+            $rows = Manager::getRepositoryFactory()
                 ->getRepository(AbstractPropertyValue::class)
                 ->get([
                     'element_id' => $this->element->getId(),
@@ -72,7 +72,7 @@ class PropertyValues
 
     protected function initValue(Property $property, array $data = null): void
     {
-        $value = Catalog::getPropertyValuesFactory()
+        $value = Manager::getPropertyValuesFactory()
             ->createSuitableProperty(
                 $property,
                 $this->element,

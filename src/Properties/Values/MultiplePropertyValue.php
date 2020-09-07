@@ -4,7 +4,7 @@ namespace Catalog\Core\Properties\Values;
 
 use Catalog\Core\Properties\Property;
 use Catalog\Core\Entities\Element;
-use Catalog\Core\Catalog;
+use Catalog\Core\Manager;
 use InvalidArgumentException;
 
 class MultiplePropertyValue extends AbstractPropertyValue
@@ -70,7 +70,7 @@ class MultiplePropertyValue extends AbstractPropertyValue
     public function setData(iterable $data = null)
     {
         if (is_iterable($data)) {
-            $data = Catalog::getPropertyValuesFactory()
+            $data = Manager::getPropertyValuesFactory()
                 ->createSuitableProperty(
                     $this->property,
                     $this->element,
@@ -90,11 +90,11 @@ class MultiplePropertyValue extends AbstractPropertyValue
             'element_id' => $this->element->getId(),
         ];
 
-        $rows = Catalog::getRepositoryFactory()->getRepository($this->getRepositoryName())
+        $rows = Manager::getRepositoryFactory()->getRepository($this->getRepositoryName())
             ->get($where);
 
         foreach ($rows as $row) {
-            $value = Catalog::getPropertyValuesFactory()
+            $value = Manager::getPropertyValuesFactory()
                 ->createSuitableProperty(
                     $this->property,
                     $this->element,

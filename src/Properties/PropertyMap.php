@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Catalog\Core\Properties;
 
-use Catalog\Core\Catalog;
+use Catalog\Core\Manager;
 use OutOfBoundsException;
 
 class PropertyMap
@@ -55,7 +55,7 @@ class PropertyMap
             $codes = $forceReload ? $this->getCodes() : $this->getUninitializedPropertyCodes();
         }
 
-        $rows = Catalog::getRepositoryFactory()
+        $rows = Manager::getRepositoryFactory()
             ->getRepository(Property::class)
             ->get(['code' => $codes]);
 

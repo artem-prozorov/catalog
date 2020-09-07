@@ -11,8 +11,8 @@ use Catalog\Core\Properties\Property;
 use Catalog\Core\Properties\PropertyMap;
 use Catalog\Core\Properties\Values\AbstractPropertyValue;
 use Catalog\Core\Properties\Values\PropertyValuesFactory;
-use Catalog\Core\Catalog;
 use Catalog\Core\Properties\Values\StringValue;
+use Catalog\Core\Manager;
 
 class BaseTestCase extends MockeryTestCase
 {
@@ -34,12 +34,12 @@ class BaseTestCase extends MockeryTestCase
             $this->bindings
         );
 
-        Catalog::setRepositoryFactory($this->repositoryFactory);
+        Manager::setRepositoryFactory($this->repositoryFactory);
 
         $propertyValueFactory = new PropertyValuesFactory([
             'string' => StringValue::class,
         ]);
 
-        Catalog::setPropertyValuesFactory($propertyValueFactory);
+        Manager::setPropertyValuesFactory($propertyValueFactory);
     }
 }

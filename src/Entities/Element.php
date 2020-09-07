@@ -7,6 +7,7 @@ namespace Catalog\Core\Entities;
 use Catalog\Core\Traits\HasId;
 use Catalog\Core\Traits\HasName;
 use Catalog\Core\Traits\HasCode;
+use Catalog\Core\Traits\HasCatalog;
 use Catalog\Core\Contracts\AwareOfStateChange;
 use Catalog\Core\Collections\PropertyValues;
 use Catalog\Core\Collections\Sections;
@@ -14,12 +15,14 @@ use Catalog\Core\Properties\Property;
 use Catalog\Core\Properties\PropertyMap;
 use Catalog\Core\Properties\Values\AbstractPropertyValue;
 use Catalog\Core\Catalog;
+use Catalog\Core\Manager;
 
 class Element implements AwareOfStateChange
 {
     use HasId;
     use HasName;
     use HasCode;
+    use HasCatalog;
 
     protected bool $hasChanges;
 
@@ -32,6 +35,7 @@ class Element implements AwareOfStateChange
     public function __construct(iterable $data = [])
     {
         $this->id = $data['id'] ?? 0;
+        $this->catalogCode = $data['catalog_code'] ?? '';
     }
 
     /**
@@ -108,7 +112,7 @@ class Element implements AwareOfStateChange
 
         // Get section properties
 
-        $raw = Catalog::getRepositoryFactory()
+        $raw = Manager::getRepositoryFactory()
             ->getRepository(PropertyMap::class)
             ->get(['is_general' => true]);
 
